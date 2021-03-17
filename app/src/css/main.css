@@ -1,0 +1,11 @@
+#logincontainer {
+  max-width: 500px;
+}
+
+#navbarNav {
+  justify-content: space-between;
+}
+#main {
+  max-width: 500px;
+  margin: 0 auto;
+}
