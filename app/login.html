@@ -29,9 +29,6 @@
       #logincontainer {
         max-width: 500px;
       }
-      .custom {
-        width: 450px;
-      }
 
       #navbarNav {
         justify-content: space-between;
@@ -76,31 +73,30 @@
       <h1>Login</h1>
       <form>
         <!-- Email field-->
+
         <div class="form-group mb-3">
           <label for="exampleInputEmail1">Email address</label>
-          <div class="input-group mb-2 mr-sm-2">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <i class="bi bi-person-circle"></i>
-              </div>
-            </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">
+              <i class="bi bi-person-circle"></i>
+            </span>
             <input
-              type="text"
+              type="email"
               class="form-control"
-              id="exampleInputEmail1"
-              placeholder="E-mail"
+              placeholder="Username"
+              aria-label="Username"
+              aria-describedby="basic-addon1"
             />
           </div>
         </div>
+
         <!-- Password field-->
         <div class="form-group mb-3">
-          <label for="exampleInputPassword1">Password</label>
-          <div class="input-group mb-2 mr-sm-2">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <i class="bi bi-key-fill"></i>
-              </div>
-            </div>
+          <label for="exampleInputEmail1">Password</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">
+              <i class="bi bi-key-fill"></i>
+            </span>
             <input
               type="password"
               class="form-control"
@@ -109,9 +105,10 @@
             />
           </div>
         </div>
+
         <!-- Submit button -->
         <div class="text-center form-group mb-3">
-          <button type="submit" class="btn btn-success custom">Login</button>
+          <button type="submit" class="btn btn-success w-100">Login</button>
         </div>
         <div class="text-center">
           <p>Don't have an account? <a href="register.html">Register</a></p>
