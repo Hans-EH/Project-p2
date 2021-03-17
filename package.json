@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Hans-EH/Project-p2/issues"
   },
-  "homepage": "https://github.com/Hans-EH/Project-p2#readme"
+  "homepage": "https://github.com/Hans-EH/Project-p2#readme",
+  "dependencies": {
+    "mongodb": "^3.6.4"
+  }
 }
