@@ -21,4 +21,9 @@ router.get("/login", function (req, res, next) {
   res.render("login", { title: "login" });
 });
 
+// Settings route
+router.get("/settings", function (req, res, next) {
+  res.render("settings", { title: "Settings" });
+});
+
 module.exports = router;
