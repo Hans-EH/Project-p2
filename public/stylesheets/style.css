@@ -1,8 +1,11 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+#logincontainer {
+  max-width: 500px;
 }
 
-a {
-  color: #00B7FF;
+#navbarNav {
+  justify-content: space-between;
+}
+#main {
+  max-width: 500px;
+  margin: 0 auto;
 }
