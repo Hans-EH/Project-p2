@@ -88,15 +88,17 @@
       });
 
       // return labels and values as object
-      return {
-        dataValues,
-        dataLabels,
-      };
+      //   return {
+      //     dataValues,
+      //     dataLabels,
+      //   };
     } catch {
       console.log("Forhelvede....");
     }
   }
 
+  // Test funktion indtil videre
+  // til at displaye sidste update
   const setLastUpdate = () => {
     let date = new Date();
     let dateString = `${date.getDate()}/${date.getMonth()}-${date.getFullYear()}`;
@@ -110,11 +112,13 @@
     document.getElementById("lastUpdate").innerText = timeString;
   };
 
+  // Fetch data after page contnet has loaded
   window.addEventListener("load", function () {
     energiDataEMI();
     setLastUpdate();
   });
 
+  // onClick eventlistner for refresh button
   document.getElementById("refresh").addEventListener("click", () => {
     energiDataEMI();
     setLastUpdate();
