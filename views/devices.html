@@ -1,0 +1,128 @@
+{% extends 'base.html' %} {% block content %}
+<!-- Devices sub navigation -->
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button
+      class="nav-link active"
+      id="pills-profile-tab"
+      data-bs-toggle="pill"
+      data-bs-target="#pills-devices"
+      type="button"
+      role="tab"
+      aria-controls="pills-devices"
+      aria-selected="false"
+    >
+      My Devices
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button
+      class="nav-link secondary"
+      id="pills-contact-tab"
+      data-bs-toggle="pill"
+      data-bs-target="#pills-add-devices"
+      type="button"
+      role="tab"
+      aria-controls="pills-add-devices"
+      aria-selected="false"
+    >
+      Add Devices
+    </button>
+  </li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+  <!-- Tab my devices -->
+  <div
+    class="tab-pane fade show active"
+    id="pills-devices"
+    role="tabpanel"
+    aria-labelledby="pills-devices-tab"
+  >
+    <!-- Tab content -->
+    <div class="container-fluid px-0">
+      <div class="list-group">
+        <button
+          type="button"
+          class="list-group-item list-group-item-action active"
+          aria-current="true"
+        >
+          The current button
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">
+          A second item
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">
+          A third button item
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">
+          A fourth button item
+        </button>
+        <button
+          type="button"
+          class="list-group-item list-group-item-action"
+          disabled
+        >
+          A disabled button item
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Tab add devices -->
+  <div
+    class="tab-pane fade"
+    id="pills-add-devices"
+    role="tabpanel"
+    aria-labelledby="pills-add-devices-tab"
+  >
+    <!-- Tab content -->
+    <div class="container-fluid px-0">
+      <form>
+        <!-- Type selection -->
+        <div class="mb-3">
+          <label for="type" class="form-label"> Select type </label>
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Open selection</option>
+            <option value="1">Device</option>
+            <option value="2">Appliance</option>
+          </select>
+        </div>
+
+        <!-- Device Name -->
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInput"
+            placeholder="Device Name"
+          />
+          <label for="floatingInput">Name</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+          />
+          <label for="floatingInput">Email address</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+          />
+          <label for="floatingInput">Email address</label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

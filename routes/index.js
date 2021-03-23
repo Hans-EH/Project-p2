@@ -6,11 +6,6 @@ router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
 });
 
-// Demo route
-router.get("/hello", function (req, res, next) {
-  res.render("hello", { title: "Hello Word" });
-});
-
 // User registration route
 router.get("/register", function (req, res, next) {
   res.render("register", { title: "register" });
@@ -24,6 +19,10 @@ router.get("/login", function (req, res, next) {
 // Settings route
 router.get("/settings", function (req, res, next) {
   res.render("settings", { title: "Settings" });
+});
+
+router.get("/devices", function (req, res, next) {
+  res.render("devices", { title: "Devices" });
 });
 
 module.exports = router;
