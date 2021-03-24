@@ -1,6 +1,9 @@
 var express = require("express");
 var router = express.Router();
 
+const { Device } = require("../scripts/Device");
+const { activeProbability } = require("../scripts/simulation");
+
 authenticated = true;
 
 /* GET home page. */
@@ -27,20 +30,14 @@ router.get("/settings", function (req, res, next) {
 // Devices Route
 router.get("/devices", function (req, res, next) {
   if (authenticated) {
-
-    const {Device} = require("../scripts/Device");
-    const {activeProbability} = require("../scripts/simulation");
-  
+    // Data
     let myCooler = new Device("myCooler", 1000);
-    //console.log(myCooler.timeModified)
-    //console.log(myCooler.timeAdded)
-  
-    myCooler.updateActiveTime({"09:00": true, "18:00": true});
-    //console.log(myCooler.activeTime)
-  
-    let data = activeProbability(myCooler);
+    myCooler.updateActiveTime({ "09:00": true, "18:00": true });
 
-    res.render("devices", { title: "Devices" });
+    res.render("devices", {
+      title: "Devices",
+      items: activeProbability(myCooler),
+    });
   } else {
     res.redirect("/login");
   }

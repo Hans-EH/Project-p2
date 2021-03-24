@@ -183,7 +183,12 @@
     </div>
   </div>
 </div>
-{% for item in data %}
-<p>{{item}}</p>
-{% end for %}
+
+<ul class="list-group mb-3">
+  {% for item in items %}
+  <li class="list-group-item">{{item}}</li>
+  {% else %}
+  <li>False</li>
+  {% endfor %}
+</ul>
 {% endblock content %}
