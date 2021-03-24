@@ -1,27 +1,40 @@
-{% extends "base.html" %} {% block content %}
+{% extends "auth_base.html" %} {% block content %}
 <script></script>
 
 <h1>Homepage</h1>
 <div class="row mb-3">
-    <div class="col-3">
-        <div class="card">
-            <div class="card-body">This is some text within a card body.</div>
-        </div>
+  <div class="col-3">
+    <div class="card h-100 text-center">
+      <div class="card-body">
+        <h5>Money saved</h5>
+        <p>3452 DKK</p>
+      </div>
     </div>
-    <div class="col-3">
-        <div class="card">
-            <div class="card-body">This is some text within a card body.</div>
-        </div>
+  </div>
+  <div class="col-3">
+    <div class="card h-100 text-center">
+      <div class="card-body">
+        <h5>CO<sub>2</sub> saved</h5>
+        <p>230g CO<sub>2</sub>e</p>
+      </div>
     </div>
-    <div class="col-3">
-        <div class="card">
-            <div class="card-body">This is some text within a card body.</div>
-        </div>
+  </div>
+  <div class="col-3">
+    <div class="card h-100 text-center">
+      <div class="card-body">
+        <h5>Carbon footprint</h5>
+        <p>1.23kg CO<sub>2</sub>e</p>
+      </div>
     </div>
-    <div class="col-3">
-        <div class="card">
-            <div class="card-body">This is some text within a card body.</div>
-        </div>
+  </div>
+  <div class="col-3">
+    <div class="card h-100 text-center">
+      <div class="card-body">
+        <h5>
+          <a href="/devices">Devices</a>
+        </h5>
+        <p>12</p>
+      </div>
     </div>
 </div>
 
@@ -44,6 +57,26 @@
             Data from energinet.dk
         </div>
     </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+          <p class="my-0 ms-0 me-2">Green energy Production</p>
+          <!-- Time stamp -->
+          <small class="m-0" id="lastUpdate"></small>
+        </div>
+        <!-- Refresh Button -->
+        <button class="btn btn-secondary" id="refresh">
+          <i class="bi bi-arrow-repeat"></i>
+        </button>
+      </div>
+
+      <canvas id="greenEnergy"></canvas>
+    </div>
+  </div>
 </div>
 
 <script>
