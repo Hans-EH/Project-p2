@@ -25,6 +25,7 @@
   </div>
 </div>
 
+<!-- Main chart -->
 <div class="row mb-3">
   <div class="col-12">
     <div class="card">
@@ -32,20 +33,21 @@
         <div>
           <p class="m-0">CO<sub>2</sub> Emission</p>
           <!-- Time stamp -->
-          <small class="m-0" id="lastUpdate"></small>
+          <small class="m-0" id="CO2lastUpdate"></small>
         </div>
 
         <!-- Refresh Button -->
-        <button class="btn btn-secondary" id="refresh">
+        <button class="btn btn-secondary" id="refreshCO2">
           <i class="bi bi-arrow-repeat"></i>
         </button>
       </div>
 
-      <canvas id="myChart"></canvas>
+      <canvas id="CO2Chart"></canvas>
     </div>
   </div>
 </div>
 
+<!-- Energy production chart -->
 <div class="row mb-3">
   <div class="col-12">
     <div class="card">
@@ -53,16 +55,16 @@
         <div>
           <p class="m-0">Green Energy Production</p>
           <!-- Time stamp -->
-          <small class="m-0" id="lastUpdate"></small>
+          <small class="m-0" id="GreenEnergylastUpdate"></small>
         </div>
 
         <!-- Refresh Button -->
-        <button class="btn btn-secondary" id="refresh">
+        <button class="btn btn-secondary" id="refreshGreenEnergy">
           <i class="bi bi-arrow-repeat"></i>
         </button>
       </div>
 
-      <canvas id="greenEnergy"></canvas>
+      <canvas id="greenEnergyChart"></canvas>
     </div>
   </div>
 </div>
@@ -90,7 +92,7 @@
       dataLabels = dataLabels.reverse();
       dataValues = dataValues.reverse();
 
-      var ctx = document.getElementById("myChart").getContext("2d");
+      var ctx = document.getElementById("CO2Chart").getContext("2d");
       var chart = new Chart(ctx, {
         // The type of chart we want to create
         type: "line",
@@ -120,9 +122,82 @@
     }
   }
 
+  // Kode til hentning of visning af energiproduktion
+  async function greenEnergiDataEMI() {
+    try {
+      const URI =
+      'https://www.energidataservice.dk/proxy/api/datastore_search_sql?sql=SELECT "Minutes5DK", "PriceArea", "OffshoreWindPower", "OnshoreWindPower", "SolarPower" FROM "electricityprodex5minrealtime" ORDER BY "Minutes5UTC" DESC LIMIT 100';
+      let data = await fetch(URI).then((response) => response.json());
+
+      // Arrays for labels and values
+      let dataLabels = [];
+      let dataValuesOffWind = [];
+      let dataValuesOnWind = [];
+      let dataValuesSolar = [];
+
+      // Iterate over reponse results
+      for (let i = 0; i < data.result.records.length; i++) {
+        // Push labels and values
+        if (data.result.records[i].PriceArea == "DK1") {
+          dataLabels.push(data.result.records[i].Minutes5DK.slice(-8, -3));
+          dataValuesOffWind.push(data.result.records[i].OffshoreWindPower);
+          dataValuesOnWind.push(data.result.records[i].OnshoreWindPower);
+          dataValuesSolar.push(data.result.records[i].SolarPower);
+        }
+      }
+      // Reverse Arrays
+      dataLabels = dataLabels.reverse();
+      dataValuesOffWind = dataValuesOffWind.reverse();
+      dataValuesOnWind = dataValuesOnWind.reverse();
+      dataValuesSolar = dataValuesSolar.reverse();
+
+
+
+      var ctx = document.getElementById("greenEnergyChart").getContext("2d");
+      var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: "line",
+        data: {
+          labels: dataLabels.slice(0, 20),
+          datasets: [
+            {
+              label: "Offshore Energy Production (Vest) (5min) (MWh)",
+              borderColor: "rgb(99, 132, 255)",
+              fill: false,
+              data: dataValuesOffWind.slice(0, 20),
+            },
+            {
+              label: "Onshore Energy Production (Vest) (5min) (MWh)",
+              borderColor: "rgb(132, 255, 99)",
+              fill: false,
+              data: dataValuesOnWind.slice(0, 20),
+            },
+            {
+              label: "Solar Energy Production (Vest) (5min) (MWh)",
+              borderColor: "rgb(255, 255, 55)",
+              fill: false,
+              data: dataValuesSolar.slice(0, 20),
+            },
+          ],
+        },
+
+        // Configuration options go here
+        options: {},
+      });
+
+      // return labels and values as object
+      //   return {
+      //     dataValues,
+      //     dataLabels,
+      //   };
+    } catch {
+      console.log("Forhelvede....");
+    }
+  }
+
   // Test funktion indtil videre
   // til at displaye sidste update
-  const setLastUpdate = () => {
+  const setLastUpdate = (lastUpdate) => {
     let date = new Date();
     let dateString = `${date.getDate()}/${date.getMonth()}-${date.getFullYear()}`;
     let hours = date.getHours < 10 ? "0" + date.getHours() : date.getHours();
@@ -132,19 +207,26 @@
       date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
 
     let timeString = `${dateString} ${hours}:${mins}:${secs}`;
-    document.getElementById("lastUpdate").innerText = timeString;
+    document.getElementById(lastUpdate).innerText = timeString;
   };
 
   // Fetch data after page contnet has loaded
   window.addEventListener("load", function () {
     energiDataEMI();
-    setLastUpdate();
+    greenEnergiDataEMI();
+    //setLastUpdate();
   });
 
   // onClick eventlistner for refresh button
-  document.getElementById("refresh").addEventListener("click", () => {
+  document.getElementById("refreshCO2").addEventListener("click", () => {
     energiDataEMI();
-    setLastUpdate();
+    setLastUpdate("CO2lastUpdate");
+  });
+
+  // onClick eventlistner for Energy refresh button
+  document.getElementById("refreshGreenEnergy").addEventListener("click", () => {
+    greenEnergiDataEMI();
+    setLastUpdate("GreenEnergylastUpdate");
   });
 </script>
 
