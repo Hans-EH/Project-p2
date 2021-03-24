@@ -1,3 +1,164 @@
-{% extends "base.html" %} {% block content %}
+{% extends "auth_base.html" %} {% block content %}
+<script></script>
+
 <h1>Homepage</h1>
+<div class="row mb-3">
+  <div class="col-3">
+    <div class="card h-100 text-center">
+      <div class="card-body">
+        <h5>Money saved</h5>
+        <p>3452 DKK</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card h-100 text-center">
+      <div class="card-body">
+        <h5>CO<sub>2</sub> saved</h5>
+        <p>230g CO<sub>2</sub>e</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card h-100 text-center">
+      <div class="card-body">
+        <h5>Carbon footprint</h5>
+        <p>1.23kg CO<sub>2</sub>e</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card h-100 text-center">
+      <div class="card-body">
+        <h5>
+          <a href="/devices">Devices</a>
+        </h5>
+        <p>12</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+          <p class="my-0 ms-0 me-2">CO<sub>2</sub> Emission</p>
+          <!-- Time stamp -->
+          <small class="m-0" id="lastUpdate"></small>
+        </div>
+
+        <!-- Refresh Button -->
+        <button class="btn btn-secondary" id="refresh">
+          <i class="bi bi-arrow-repeat"></i>
+        </button>
+      </div>
+
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+          <p class="my-0 ms-0 me-2">Green energy Production</p>
+          <!-- Time stamp -->
+          <small class="m-0" id="lastUpdate"></small>
+        </div>
+        <!-- Refresh Button -->
+        <button class="btn btn-secondary" id="refresh">
+          <i class="bi bi-arrow-repeat"></i>
+        </button>
+      </div>
+
+      <canvas id="greenEnergy"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+  async function energiDataEMI() {
+    try {
+      const URI =
+        'https://www.energidataservice.dk/proxy/api/datastore_search_sql?sql=SELECT"Minutes5UTC", "Minutes5DK", "PriceArea", "CO2Emission" FROM "co2emis" ORDER BY "Minutes5UTC" DESC LIMIT 100';
+      let data = await fetch(URI).then((response) => response.json());
+
+      // Arrays for labels and values
+      let dataLabels = [];
+      let dataValues = [];
+
+      // Iterate over reponse results
+      for (let i = 0; i < data.result.records.length; i++) {
+        // Push labels and values
+        if (data.result.records[i].PriceArea == "DK1") {
+          dataValues.push(data.result.records[i].CO2Emission);
+          dataLabels.push(data.result.records[i].Minutes5DK);
+        }
+      }
+      // Reverse Arrays
+      dataLabels = dataLabels.reverse();
+      dataValues = dataValues.reverse();
+
+      var ctx = document.getElementById("myChart").getContext("2d");
+      var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: "line",
+        data: {
+          labels: dataLabels.slice(0, 100),
+          datasets: [
+            {
+              label: "CO2 Emission (5min) (g/kWh)",
+              borderColor: "rgb(255, 99, 132)",
+              data: dataValues.slice(0, 100),
+              //steppedLine: "true",
+            },
+          ],
+        },
+
+        // Configuration options go here
+        options: {},
+      });
+
+      // return labels and values as object
+      //   return {
+      //     dataValues,
+      //     dataLabels,
+      //   };
+    } catch {
+      console.log("Forhelvede....");
+    }
+  }
+
+  // Test funktion indtil videre
+  // til at displaye sidste update
+  const setLastUpdate = () => {
+    let date = new Date();
+    let dateString = `${date.getDate()}/${date.getMonth()}-${date.getFullYear()}`;
+    let hours = date.getHours < 10 ? "0" + date.getHours() : date.getHours();
+    let mins =
+      date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+    let secs =
+      date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+
+    let timeString = `${dateString} ${hours}:${mins}:${secs}`;
+    document.getElementById("lastUpdate").innerText = timeString;
+  };
+
+  // Fetch data after page contnet has loaded
+  window.addEventListener("load", function () {
+    energiDataEMI();
+    setLastUpdate();
+  });
+
+  // onClick eventlistner for refresh button
+  document.getElementById("refresh").addEventListener("click", () => {
+    energiDataEMI();
+    setLastUpdate();
+  });
+</script>
+
 {% endblock %}

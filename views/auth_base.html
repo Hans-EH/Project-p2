@@ -20,6 +20,14 @@
     ></script>
 
     <!-- Chart.js dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <script>
+      var toastElList = [].slice.call(document.querySelectorAll(".toast"));
+      var toastList = toastElList.map(function (toastEl) {
+        return new bootstrap.Toast(toastEl, option);
+      });
+    </script>
 
     <!-- Bootstrap Icons-->
     <link
@@ -32,6 +40,6 @@
   <body>
     {% include 'navbar.html' %}
 
-    <div class="container">{% block content %} {% endblock %}</div>
+    <div class="container pb-3">{% block content %} {% endblock %}</div>
   </body>
 </html>
