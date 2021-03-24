@@ -27,6 +27,19 @@ router.get("/settings", function (req, res, next) {
 // Devices Route
 router.get("/devices", function (req, res, next) {
   if (authenticated) {
+
+    const {Device} = require("../scripts/Device");
+    const {activeProbability} = require("../scripts/simulation");
+  
+    let myCooler = new Device("myCooler", 1000);
+    //console.log(myCooler.timeModified)
+    //console.log(myCooler.timeAdded)
+  
+    myCooler.updateActiveTime({"09:00": true, "18:00": true});
+    //console.log(myCooler.activeTime)
+  
+    let data = activeProbability(myCooler);
+
     res.render("devices", { title: "Devices" });
   } else {
     res.redirect("/login");
