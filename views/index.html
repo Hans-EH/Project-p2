@@ -52,10 +52,10 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header d-flex justify-content-between">
-        <div>
+        <div class="d-flex align-items-center">
           <p class="m-0">CO<sub>2</sub> Emission</p>
           <!-- Time stamp -->
-          <small class="m-0" id="lastUpdateCO2"></small>
+          <small class="ms-2 me-0 my-0" id="lastUpdateCO2"></small>
         </div>
         <!-- Refresh Button -->
         <button class="btn btn-secondary" id="refreshCO2">
@@ -91,7 +91,7 @@
         <div class="d-flex align-items-center">
           <p class="my-0">Green Energy Production</p>
           <!-- Time stamp -->
-          <small class="m-0" id="lastUpdateGreenEnergy"></small>
+          <small class="ms-2 me-0 my-0" id="lastUpdateGreenEnergy"></small>
         </div>
         <!-- Refresh Button -->
         <button class="btn btn-secondary" id="refreshGreenEnergy">
@@ -334,8 +334,9 @@
   // Fetch data after page contnet has loaded
   window.addEventListener("load", function () {
     energiDataEMI();
+    setLastUpdate("lastUpdateCO2");
     greenEnergyDataEMI();
-    //setLastUpdate();
+    setLastUpdate("lastUpdateGreenEnergy");
   });
 
   // onClick eventlistner for refresh button
