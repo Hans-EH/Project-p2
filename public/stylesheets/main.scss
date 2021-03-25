@@ -1,0 +1,22 @@
+#logincontainer {
+  max-width: 500px;
+}
+
+#navbarNav {
+  justify-content: space-between;
+}
+#main {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.mini-card {
+  h5,
+  p {
+    margin-bottom: 0;
+  }
+  .card-header {
+    background-color: inherit;
+    border-bottom: none;
+  }
+}
