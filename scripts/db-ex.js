@@ -13,7 +13,12 @@ async function testConnect() {
     const documentList = await table.find({}).toArray();
     for (i of documentList){
       console.log(i._id);
+      const profile_table = database.collection("profiles");
+      const profile_query = {user_link : i._id};
+      const profile = await profile_table.findOne(profile_query);
+      console.log(profile);
     }
+
     return documentList;
   } catch (e) {
     console.error(e);
