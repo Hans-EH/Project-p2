@@ -28,8 +28,10 @@ async function testConnect() {
     //shows all registered users
     console.log("All Registered Users: "+documentList.length+"\n");
     for(let i = 0; i < documentList.length; i++){
-      const profile_query = {user_link : documentList[i]._id.toString()};
+      const profile_link = documentList[i]._id.toString();
+      const profile_query = {user_link : profile_link};
       const profile = await profile_table.findOne(profile_query);
+      console.log("User "+i+":");
       console.log(documentList[i]);
       console.log(profile);
     }
