@@ -3,7 +3,7 @@ const { MongoClient } = require("mongodb");
 const uri = "mongodb://localhost:27017";
 const client = new MongoClient(uri, { useUnifiedTopology: true });
 
-exports.testConnect = async function testConnect() {
+async function testConnect() {
   try {
     await client.connect();
     const database = client.db("<monitor-project>");
