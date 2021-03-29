@@ -22,14 +22,15 @@ async function testConnect() {
     const profile_table = database.collection("profiles");
 
     //Here we query profiles with the link made to Stures user 
-    const profile_query = {user_link : sturelink};
-    const profile = await profile_table.findOne(profile_query);
-    console.log(profile);
+
 
 
     //shows all registered users
+    console.log("All Registered Users\n");
     for(let i = 0; i < documentList.length; i++){
-      console.log(documentList[i]._id.toString());
+      const profile_query = {user_link : documentList[i]};
+      const profile = await profile_table.findOne(profile_query);
+      console.log(profile);
     }
 
     return documentList;
