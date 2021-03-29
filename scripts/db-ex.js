@@ -11,6 +11,9 @@ async function testConnect() {
     const table = database.collection("users");
     const query = { };
     const documentList = await table.find({}).toArray();
+    for (i of documentList){
+      console.log(i);
+    }
     return documentList;
   } catch (e) {
     console.error(e);
