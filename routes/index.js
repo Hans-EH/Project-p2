@@ -3,6 +3,7 @@ var router = express.Router();
 
 const { Device } = require("../scripts/Device");
 const { activeProbability } = require("../scripts/simulation");
+const { testConnect } = require("../scripts/db-ex");
 
 authenticated = true;
 
@@ -50,7 +51,11 @@ router.get("/register", function (req, res, next) {
 
 // User authentication route
 router.get("/login", function (req, res, next) {
-  res.render("login", { title: "login" });
+  let hello = () => {
+    console.log("Hello World");
+  };
+
+  res.render("login", { title: "login", hello: hello() });
 });
 
 module.exports = router;
