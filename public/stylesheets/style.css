@@ -5,19 +5,7 @@
 #navbarNav {
   justify-content: space-between;
 }
-
 #main {
   max-width: 500px;
   margin: 0 auto;
 }
-
-.mini-card h5,
-.mini-card p {
-  margin-bottom: 0;
-}
-.mini-card .card-header {
-  background-color: inherit;
-  border-bottom: none;
-}
-
-/*# sourceMappingURL=style.css.map */
