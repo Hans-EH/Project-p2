@@ -30,6 +30,7 @@ async function testConnect() {
     for(let i = 0; i < documentList.length; i++){
       const profile_query = {user_link : documentList[i]._id.toString()};
       const profile = await profile_table.findOne(profile_query);
+      console.log(documentList[i]);
       console.log(profile);
     }
 
