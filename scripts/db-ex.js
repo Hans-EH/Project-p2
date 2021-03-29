@@ -11,13 +11,12 @@ async function testConnect() {
     const table = database.collection("users");
     const query = { };
     const documentList = await table.find({}).toArray();
-    for (i of documentList){
-      console.log(`id: ${i._id} - username: ${i.user_id}`);
-      const profile_table = database.collection("profiles");
-      const profile_query = {user_link : i._id};
-      const profile = await profile_table.findOne(profile_query);
-      console.log(profile);
-    }
+
+    //Test profiling
+    const profile_table = database.collection("profiles");
+    const profile_query = {user_link : "6061867a138d36f625fe9252"};
+    const profile = await profile_table.findOne(profile_query);
+    console.log(profile);
 
     return documentList;
   } catch (e) {
