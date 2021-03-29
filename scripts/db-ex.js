@@ -12,7 +12,7 @@ async function testConnect() {
     const query = { };
     const documentList = await table.find({}).toArray();
     for (i of documentList){
-      console.log(i);
+      console.log(i._id);
     }
     return documentList;
   } catch (e) {
