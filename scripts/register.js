@@ -26,7 +26,7 @@ async function testConnect() {
 
 
     //shows all registered users
-    console.log("All Registered Users\n");
+    console.log("All Registered Users: "+documentList.length"\n");
     for(let i = 0; i < documentList.length; i++){
       const profile_query = {user_link : documentList[i]._id.toString()};
       const profile = await profile_table.findOne(profile_query);
