@@ -11,10 +11,12 @@ async function testConnect() {
     const table = database.collection("users");
     const query = { };
     const documentList = await table.find({}).toArray();
-
+    console.log(documentList[1]);
+    const sturelink = documentList[1]._id;
+    console.log(typeof(sturelink))
     //Test profiling
     const profile_table = database.collection("profiles");
-    const profile_query = {user_link : "6061867a138d36f625fe9252"};
+    const profile_query = {user_link : sturelink};
     const profile = await profile_table.findOne(profile_query);
     console.log(profile);
 
