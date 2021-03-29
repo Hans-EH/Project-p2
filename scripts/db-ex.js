@@ -6,8 +6,8 @@ const client = new MongoClient(uri, { useUnifiedTopology: true });
 async function testConnect() {
   try {
     await client.connect();
-    const database = client.db("<monitor-project>");
-
+    const database = client.db("monitor-project");
+    console.log("Got to this point")
     const table = database.collection("users");
     const query = { };
     const documentList = await table.find({}).toArray();
