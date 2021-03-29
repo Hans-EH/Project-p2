@@ -12,7 +12,7 @@ async function testConnect() {
     const query = { };
     const documentList = await table.find({}).toArray();
     console.log(documentList[1]);
-    const sturelink = documentList[1]._id;
+    const sturelink = documentList[1]._id.toString();
     console.log(typeof(sturelink))
     //Test profiling
     const profile_table = database.collection("profiles");
