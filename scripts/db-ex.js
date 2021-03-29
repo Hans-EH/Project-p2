@@ -6,11 +6,10 @@ const client = new MongoClient(uri, { useUnifiedTopology: true });
 exports.testConnect = async function testConnect() {
   try {
     await client.connect();
-    const database = client.db("project-db");
+    const database = client.db("<monitor-project>");
 
-    const table = database.collection("devices");
-    const query = { user_id: currentUser.id };
-    const item = await table.findOne(query);
+    const table = database.collection("users");
+    const query = { };
     const documentList = await table.find({}).toArray();
     return documentList;
   } catch (e) {
