@@ -26,8 +26,10 @@ async function testConnect() {
     const profile = await profile_table.findOne(profile_query);
     console.log(profile);
 
+
+    //shows all registered users
     for(let i = 0; i < documentList.length; i++){
-      console.log(documentList[i]);
+      console.log(documentList[i]._id.toString());
     }
 
     return documentList;
