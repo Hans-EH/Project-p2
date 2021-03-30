@@ -43,6 +43,12 @@ router.get("/devices", function (req, res, next) {
   }
 });
 
+router.post("/handle", (request, response) => {
+  //code to perform particular action.
+  //To access POST variable use req.body()methods.
+  console.log(request.body);
+});
+
 // User registration route
 router.get("/register", function (req, res, next) {
   res.render("register", { title: "register" });

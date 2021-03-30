@@ -27,56 +27,37 @@ async function testConnect() {
   } catch (e) {
     console.error(e);
   }
-};
+}
 
-// validates that all register information is correct
-async function validateRegInfo() {
-  const express = require("express");
-  const bodyParser = require("body-parser");
-  const router = express.Router();
-  const app = express();
-  
-  //Here we are configuring express to use body-parser as middle-ware.
-  app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(bodyParser.json());
-  
-  router.post('/handle',(request,response) => {
-      //code to perform particular action.
-      //To access POST variable use req.body()methods.
-      console.log(request.body);
-  });
-  
-  // add router in the Express app.
-  app.use("/", router);
-};
-
-async function registerUser(UserObject) {
+async function registerUser(userObject) {
   try {
     await client.connect();
     const db = client.db("<monitor-project>");
-    const table = db.collection("users");
-    const profile_table = db.collection("profiles");
+    const users = db.collection("users");
+    const profiles = db.collection("profiles");
 
-    const hans = {
-      email: "Frederik",
-      password: "123456",
-    };
+    // Insert the user object into users table
+    const user_res = await users.insertOne(userObject);
 
-    const res = await table.insertOne(hans);
-    console.log(typeof res);
-    const resJson = JSON.stringify(res);
-    console.log(resJson);
-
+    // Profile Initial settings
     const userProfile = {
-      user_link: res._id,
-      nightmode: true,
+      user_link: user_res.insertedId,
+      nightmode: false,
     };
+    // Create one to one insert with users
+    const profile_res = await profiles.insertOne(userProfile);
 
-    const profile_res = await profile_table.insertOne(userProfile);
+    console.log(profile_res.result);
   } catch (error) {
-    print(error);
+    console.log(error);
   }
 }
 
 //testConnect();
-registerUser();
+
+const frederik = {
+  email: "thorbensen@gmail.com",
+  password: "hgsdf2i23orijgsd",
+};
+
+registerUser(frederik);
