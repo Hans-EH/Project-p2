@@ -41,9 +41,7 @@ async function registerUser(userObject) {
 
     // Check if the insert was succesfull.
     if (user_res.result.ok && user_res.result.n == 1) {
-      console.log(
-        `Profiles tried: ${user_res.result.n} - Created succesfully: ${user_res.result.ok}`
-      );
+      console.log(` User Created succesfully: ${user_res.result.ok}`);
 
       // Profile Initial settings
       const userProfile = {
@@ -53,9 +51,7 @@ async function registerUser(userObject) {
 
       // Create one to one insert with users
       const profile_res = await profiles.insertOne(userProfile);
-      console.log(
-        `Profiles tried: ${profile_res.result.ok} - Created succesfully: ${profile_res.result.ok}`
-      );
+      console.log(`Profiles Created succesfully: ${profile_res.result.ok}`);
     } else {
       return false;
     }
