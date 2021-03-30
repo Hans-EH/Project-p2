@@ -39,8 +39,8 @@ async function registerUser(userObject) {
     // Insert the user object into users table
     const user_res = await users.insertOne(userObject);
 
-    let user_num = user_res.result[0];
-    let user_ok = user_res.result[1];
+    let user_num = user_res.result.n;
+    let user_ok = user_res.result.ok;
 
     console.log(`Req ${user_num} - Went Through ${user_ok}`);
 
@@ -72,25 +72,21 @@ exports.validateRegInfo = function validateRegInfo(form) {
   password1 = form.password1.value;
   password2 = form.password2.value;
 
-  if (email == '')
+  if (email == "")
     alert("Please enter a valid email on the form name@mail.com");
   // If password not entered
-  else if (password1 == '')
-    alert("Please enter Password");
-
+  else if (password1 == "") alert("Please enter Password");
   // If confirm password not entered
-  else if (password2 == '')
-    alert("Please confirm password");
-
-  // If Not same return False.    
+  else if (password2 == "") alert("Please confirm password");
+  // If Not same return False.
   else if (password1 != password2) {
-    alert("\nPassword did not match: Please try again...")
+    alert("\nPassword did not match: Please try again...");
     return false;
   }
 
   // If same return True.
   else {
-    alert("User Registration Complete: Welcome to Sustanify!!")
+    alert("User Registration Complete: Welcome to Sustanify!!");
     return true;
   }
-}
+};
