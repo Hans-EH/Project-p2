@@ -39,6 +39,11 @@ async function registerUser(userObject) {
     // Insert the user object into users table
     const user_res = await users.insertOne(userObject);
 
+    let user_num = user_res.result[0];
+    let user_ok = user_res.result[1];
+
+    console.log(`Req ${user_num} - Went Through ${user_ok}`);
+
     // Profile Initial settings
     const userProfile = {
       user_link: user_res.insertedId,
