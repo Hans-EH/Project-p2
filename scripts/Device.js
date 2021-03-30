@@ -16,7 +16,6 @@ exports.Device = class Device {
             "12:00": false, "13:00": false, "14:00": false, "15:00": false, "16:00": false, "17:00": false,
             "18:00": false, "19:00": false, "20:00": false, "21:00": false, "22:00": false, "23:00": false
         };
-
     }
 
     /**
