@@ -10,7 +10,7 @@ exports.getAllDevices = async function getAllDevices(){
         const devices = db.collection("devices");
     
         // Find all devices in the device collection and store as an array
-        const device_list = devices.find({}).toArray();
+        const device_list = await devices.find({}).toArray();
     
         //Return the device list
         console.table(device_list);
