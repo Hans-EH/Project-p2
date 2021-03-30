@@ -38,16 +38,15 @@ async function registerUser(userObject) {
     const users = db.collection("users");
     const profiles = db.collection("profiles");
 
-    let newUser = userObject;
     bcrypt.hash(userPass, saltRounds, (err, hash) => {
       userObject.password = hash;
-      console.log(`hashed password: ${hash}`);
+      console.log(userObject.password);
+
+      // Insert the user object into users table
+      const user_res = await users.insertOne(userObject);
     });
 
-    console.log(userObject.password);
 
-    // Insert the user object into users table
-    const user_res = await users.insertOne(userObject);
 
     // Check if the insert was succesfull.
     if (user_res.result.ok && user_res.result.n == 1) {
