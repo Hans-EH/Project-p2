@@ -29,7 +29,7 @@ async function testConnect() {
   }
 }
 
-exports.registerUser = async function registerUser() {
+async function registerUser(UserObject) {
   try {
     await client.connect();
     const db = client.db("<monitor-project>");
@@ -37,11 +37,13 @@ exports.registerUser = async function registerUser() {
     const profile_table = db.collection("profiles");
 
     const hans = {
-      user_id: "Frederik",
+      email: "Frederik",
       password: "123456",
     };
 
     const res = await table.insertOne(hans);
+    console.log(res.insertedId);
+    console.log(res.ops[0]);
 
     const userProfile = {
       user_link: res._id,
@@ -49,12 +51,10 @@ exports.registerUser = async function registerUser() {
     };
 
     const profile_res = await profile_table.insertOne(userProfile);
-
-    console.log(res);
   } catch (error) {
     print(error);
   }
-};
+}
 
-testConnect();
-//registerUser();
+//testConnect();
+registerUser();

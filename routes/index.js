@@ -3,7 +3,6 @@ var router = express.Router();
 
 const { Device } = require("../scripts/Device");
 const { activeProbability } = require("../scripts/simulation");
-const { testConnect } = require("../scripts/db-ex");
 
 authenticated = true;
 
@@ -42,6 +41,12 @@ router.get("/devices", function (req, res, next) {
   } else {
     res.redirect("/login");
   }
+});
+
+router.post("/handle", (request, response) => {
+  //code to perform particular action.
+  //To access POST variable use req.body()methods.
+  console.log(request.body);
 });
 
 // User registration route
