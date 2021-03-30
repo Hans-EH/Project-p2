@@ -35,12 +35,11 @@ router.get("/devices", function (req, res, next) {
     // Data
     let myCooler = new Device("myCooler", 1000);
     myCooler.updateActiveTime({ "09:00": true, "18:00": true });
-    let devicesList = getAllDevices();
-    console.table(devicesList);
+ 
     res.render("devices", {
       title: "Devices",
       items: activeProbability(myCooler),
-      devices: devicesList,
+      devices: await getAllDevices(),
     });
 
   } else {
