@@ -57,5 +57,5 @@ exports.registerUser = async function registerUser(UserObject) {
   }
 };
 
-testConnect();
-//registerUser();
+//testConnect();
+registerUser();
