@@ -32,11 +32,14 @@ router.get("/settings", function (req, res, next) {
 // Devices Route
 router.get("/devices", async function (req, res, next) {
   if (authenticated) {
-    // Data
+    // This is an example of showing a device on our device.html
     let myCooler = new Device("myCooler", 1000);
     myCooler.updateActiveTime({ "09:00": true, "18:00": true });
     
+    //Make a request to our database to retrieve a list of all devices and wait for a respond
     let deviceList = await getAllDevices();
+
+    //Pass over the device list and probability array of the above example to the client
     res.render("devices", {
       title: "Devices",
       items: activeProbability(myCooler),

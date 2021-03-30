@@ -79,17 +79,8 @@
     <!-- Tab content -->
     <div class="container-fluid px-0">
       <form action="/devices/post" method="POST">
-        <!-- Type selection -->
-        <div class="mb-3">
-          <label for="type" class="form-label"> Select type </label>
-          <select class="form-select" aria-label="Default select example">
-            <option selected>Open selection</option>
-            <option value="1">Device</option>
-            <option value="2">Appliance</option>
-          </select>
-        </div>
 
-        <!-- Device Name -->
+        <!-- Device Name field -->
         <div class="form-floating mb-3">
           <input
             type="text"
@@ -101,6 +92,7 @@
           <label for="floatingInput">Name</label>
         </div>
 
+        <!-- Energy usage field -->
         <div class="form-floating mb-3">
           <input
             type="number"
@@ -109,19 +101,7 @@
             id="floatingInput"
             placeholder="name@example.com"
           />
-          <label for="floatingInput">Power usage in watt (W)</label>
-        </div>
-
-        <div class="form-check mb-3">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value=""
-            id="flexCheckDefault"
-          />
-          <label class="form-check-label" for="flexCheckDefault">
-            Constant Consumption
-          </label>
+          <label for="floatingInput">Energy consumption in watts (W)</label>
         </div>
 
         <div class="wrapper mb-3">
@@ -192,12 +172,3 @@
     </div>
   </div>
 </div>
-
-<ul class="list-group mb-3">
-  {% for item in items %}
-  <li class="list-group-item">{{item}}</li>
-  {% else %}
-  <li>False</li>
-  {% endfor %}
-</ul>
-{% endblock content %}
