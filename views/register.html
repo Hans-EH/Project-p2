@@ -12,6 +12,7 @@
             </div>
           </div>
           <input type="email" class="form-control" id="email1" placeholder="E-mail" />
+          <!-- <i class="bi bi-check-circle-fill colorsuccess iconsize"></i> -->
         </div>
       </div>
 
@@ -24,6 +25,7 @@
             </div>
           </div>
           <input type="password" class="form-control" id="password1" placeholder="Password" />
+          <!-- <i class="bi bi-check-circle-fill colorsuccess iconsize"></i> -->
         </div>
       </div>
 
@@ -36,6 +38,7 @@
             </div>
           </div>
           <input type="password" class="form-control" id="password2" placeholder="Re-enter password" />
+          <!-- <i class="bi bi-check-circle-fill colorsuccess iconsize"></i> -->
         </div>
       </div>
 
@@ -54,8 +57,37 @@
   </div>
 </div>
 <div class="container">
+  <script>
+    function validateRegInfo(form) {
+      email = form.email1.value;
+      password1 = form.password1.value;
+      password2 = form.password2.value;
+
+      if (email == '') {
+        //document.getElementById("email-icon").innerHTML = <i class="bi bi-exclamation-diamond-fill colorfailure iconsize"></i>;
+        alert("Please enter a valid email on the form name@mail.com");
+      }
+      // If password not entered
+      else if (password1 == '')
+        alert("Please enter Password");
+
+      // If confirm password not entered
+      else if (password2 == '')
+        alert("Please confirm password");
+
+      // If Not same return False.
+      else if (password1 != password2) {
+        alert("\nPassword did not match: Please try again...")
+        return false;
+      }
+
+      // If same return True.
+      else {
+        alert("User Registration Complete: Welcome to Sustanify!!")
+        document.location.href = "https://www.youtube.com";
+        return true;
+      }
+    }
+  </script>
 </div>
-<scripts>
-  
-</scripts>
 {% endblock content %}
