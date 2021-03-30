@@ -10,3 +10,7 @@
 - start db server: brew services start mongodb-community@4.4
 - stop db server: brew services stop mongodb-community@4.4
 - check process: brew services list
+
+## Ubuntu commands
+
+- https://gist.github.com/jctosta/af918e1618682638aa82

@@ -1,8 +1,11 @@
 {% extends 'authnon_base.html'%} {% block content %}
 <div class="container">
   <div id="main" class="justify-content-center">
+    <div class="alert alert-success" role="alert">
+      A simple success alert—check it out!
+    </div>
     <h1>Register</h1>
-    <form onsubmit="return checkPassword(this)">
+    <form onsubmit="return validateRegInfo(this)">
       <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
         <div class="input-group mb-2 mr-sm-2">
@@ -11,7 +14,12 @@
               <i class="bi bi-person-circle"></i>
             </div>
           </div>
-          <input type="text" class="form-control" id="email" placeholder="E-mail" />
+          <input
+            type="email"
+            class="form-control"
+            id="email1"
+            placeholder="E-mail"
+          />
         </div>
       </div>
 
@@ -23,19 +31,31 @@
               <i class="bi bi-key-fill"></i>
             </div>
           </div>
-          <input type="password" class="form-control" id="password1" placeholder="Password" />
+          <input
+            type="password"
+            class="form-control"
+            id="password1"
+            placeholder="Password"
+          />
         </div>
       </div>
 
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+        <label for="exampleInputPassword1" class="form-label"
+          >Confirm Password</label
+        >
         <div class="input-group mb-2 mr-sm-2">
           <div class="input-group-prepend">
             <div class="input-group-text">
               <i class="bi bi-key-fill"></i>
             </div>
           </div>
-          <input type="password" class="form-control" id="password2" placeholder="Re-enter password" />
+          <input
+            type="password"
+            class="form-control"
+            id="password2"
+            placeholder="Re-enter password"
+          />
         </div>
       </div>
 
@@ -53,34 +73,6 @@
     </div>
   </div>
 </div>
-<div class="container">
-  <script>
-    // Function to check Whether both passwords
-    // is same or not.
-    function checkPassword(form) {
-      password1 = form.password1.value;
-      password2 = form.password2.value;
-
-      // If password not entered
-      if (password1 == '')
-        alert("Please enter Password");
-
-      // If confirm password not entered
-      else if (password2 == '')
-        alert("Please enter confirm password");
-
-      // If Not same return False.    
-      else if (password1 != password2) {
-        alert("\nPassword did not match: Please try again...")
-        return false;
-      }
-
-      // If same return True.
-      else {
-        alert("Password Match: Welcome to GeeksforGeeks!")
-        return true;
-      }
-    }
-  </script>
-</div>
+<div class="container"></div>
+<scripts> </scripts>
 {% endblock content %}
