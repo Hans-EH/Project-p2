@@ -58,11 +58,14 @@
     // Function to check Whether both passwords
     // is same or not.
     function checkPassword(form) {
+      email = form.email.value;
       password1 = form.password1.value;
       password2 = form.password2.value;
 
+      if (email == '')
+        alert("Please enter a valid email on the form name@mail.com");
       // If password not entered
-      if (password1 == '')
+      else if (password1 == '')
         alert("Please enter Password");
 
       // If confirm password not entered
@@ -77,7 +80,7 @@
 
       // If same return True.
       else {
-        alert("Password Match: Welcome to GeeksforGeeks!")
+        alert("User Registration Complete: Welcome to Sustanify!")
         return true;
       }
     }
