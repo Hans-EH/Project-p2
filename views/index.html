@@ -328,7 +328,7 @@
   async function greenEnergyDataEMI() {
     try {
       const URI =
-        'https://www.energidataservice.dk/proxy/api/datastore_search_sql?sql=SELECT "Minutes5DK", "PriceArea", "OffshoreWindPower", "OnshoreWindPower", "SolarPower" FROM "electricityprodex5minrealtime" ORDER BY "Minutes5UTC" DESC LIMIT 100';
+        'https://www.energidataservice.dk/proxy/api/datastore_search_sql?sql=SELECT "Minutes5DK", "PriceArea", "OffshoreWindPower", "OnshoreWindPower", "SolarPower" FROM "electricityprodex5minrealtime" ORDER BY "Minutes5UTC" DESC LIMIT 1440';
       let data = await fetch(URI).then((response) => response.json());
 
       // Arrays for labels and values
@@ -341,7 +341,7 @@
       for (let i = 0; i < data.result.records.length; i++) {
         // Push labels and values
         if (data.result.records[i].PriceArea == "DK1") {
-          dataLabels.push(data.result.records[i].Minutes5DK.slice(-8, -3));
+          dataLabels.push(data.result.records[i].Minutes5DK.slice(-8, -3)); // we extract HH:MM
           dataValuesOffWind.push(data.result.records[i].OffshoreWindPower);
           dataValuesOnWind.push(data.result.records[i].OnshoreWindPower);
           dataValuesSolar.push(data.result.records[i].SolarPower);
@@ -358,25 +358,25 @@
         // The type of chart we want to create
         type: "line",
         data: {
-          labels: dataLabels.slice(0, 20),
+          labels: dataLabels,
           datasets: [
             {
               label: "Offshore Energy Production (Vest) (5min) (MWh)",
               borderColor: "rgb(99, 132, 255)",
               fill: false,
-              data: dataValuesOffWind.slice(0, 20),
+              data: dataValuesOffWind, //data: dataValuesOffWind.slice(0, 20),
             },
             {
               label: "Onshore Energy Production (Vest) (5min) (MWh)",
               borderColor: "rgb(132, 255, 99)",
               fill: false,
-              data: dataValuesOnWind.slice(0, 20),
+              data: dataValuesOnWind,
             },
             {
               label: "Solar Energy Production (Vest) (5min) (MWh)",
               borderColor: "rgb(255, 255, 55)",
               fill: false,
-              data: dataValuesSolar.slice(0, 20),
+              data: dataValuesSolar,
             },
           ],
         },
