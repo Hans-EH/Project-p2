@@ -12,7 +12,7 @@ exports.addDevice = async function addDevice(deviceObject) {
       // Insert the user object into users table
       const device_res = await devices.insertOne(deviceObject);
   
-      console.log(device_res.result);
+      console.log(device_res);
     } catch (error) {
       console.log(error);
     }
