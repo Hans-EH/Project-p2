@@ -39,20 +39,22 @@ async function registerUser(userObject) {
     // Insert the user object into users table
     const user_res = await users.insertOne(userObject);
 
-    let user_num = user_res.result.n;
-    let user_ok = user_res.result.ok;
+    // Check if the insert was succesfull.
+    if (user_res.result.ok && user_res.result.n == 1) {
+      console.log(`Req ${user_num} - Went Through ${user_ok}`);
 
-    console.log(`Req ${user_num} - Went Through ${user_ok}`);
+      // Profile Initial settings
+      const userProfile = {
+        user_link: user_res.insertedId,
+        nightmode: false,
+      };
 
-    // Profile Initial settings
-    const userProfile = {
-      user_link: user_res.insertedId,
-      nightmode: false,
-    };
-    // Create one to one insert with users
-    const profile_res = await profiles.insertOne(userProfile);
-
-    console.log(profile_res.result);
+      // Create one to one insert with users
+      const profile_res = await profiles.insertOne(userProfile);
+      console.log(profile_res.result.ok);
+    } else {
+      return false;
+    }
   } catch (error) {
     console.log(error);
   }
