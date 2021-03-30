@@ -44,6 +44,8 @@ async function registerUser(userObject) {
       console.log(hash);
     });
 
+    console.log(userObject.password);
+
     // Insert the user object into users table
     const user_res = await users.insertOne(userObject);
 
