@@ -3,6 +3,7 @@ var router = express.Router();
 
 const { Device } = require("../scripts/Device");
 const { activeProbability } = require("../scripts/simulation");
+const { addDevice } = require("../scripts/insert_to_db");
 
 authenticated = true;
 
@@ -41,6 +42,14 @@ router.get("/devices", function (req, res, next) {
   } else {
     res.redirect("/login");
   }
+});
+
+//Add device post handling
+router.post("/devices/post", function (req, res) {
+  const newDevice = {name: req.body.devicename, energyusage: req.body.energyusage};
+  addDevice(newDevice);
+  console.log(`Devicename: ${req.body.devicename}, Energy Usage: ${req.body.energyusage}`);
+  res.end("Successfully got device!");
 });
 
 router.post("/handle", (request, response) => {
