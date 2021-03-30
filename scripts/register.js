@@ -29,7 +29,7 @@ async function testConnect() {
   }
 }
 
-async function registerUser() {
+exports.registerUser = async function registerUser() {
   try {
     await client.connect();
     const db = client.db("<monitor-project>");
@@ -54,7 +54,7 @@ async function registerUser() {
   } catch (error) {
     print(error);
   }
-}
+};
 
 testConnect();
 //registerUser();
