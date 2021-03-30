@@ -4,6 +4,7 @@ var router = express.Router();
 const { Device } = require("../scripts/Device");
 const { activeProbability } = require("../scripts/simulation");
 const { addDevice } = require("../scripts/insert_to_db");
+const { getAllDevices } = require("../scripts/retreive_from_db");
 
 authenticated = true;
 
@@ -34,11 +35,13 @@ router.get("/devices", function (req, res, next) {
     // Data
     let myCooler = new Device("myCooler", 1000);
     myCooler.updateActiveTime({ "09:00": true, "18:00": true });
-
+ 
     res.render("devices", {
       title: "Devices",
       items: activeProbability(myCooler),
+      devices: await getAllDevices(),
     });
+
   } else {
     res.redirect("/login");
   }
@@ -46,7 +49,8 @@ router.get("/devices", function (req, res, next) {
 
 //Add device post handling
 router.post("/devices/post", function (req, res) {
-  const newDevice = {name: req.body.devicename, energyusage: req.body.energyusage};
+  let newDevice = new Device(req.body.devicename, req.body.energyusage)
+  newDevice.updateActiveTime({"18:00": true})
   addDevice(newDevice);
   console.log(`Devicename: ${req.body.devicename}, Energy Usage: ${req.body.energyusage}`);
   res.end("Successfully got device!");

@@ -49,41 +49,23 @@
           <th>Edit</th>
           <th>Remove</th>
         </tr>
+        {% for device in devices %}
         <tr>
-          <td>Drier</td>
-          <td>500 W</td>
-          <td>December 10, 1815</td>
-          <td><i class="bi bi-gear"></i></td>
+          <td>{{device.name}}</td>
+          <td>{{device.energyUsage}}</td>
+          <td>{{device.timeModified}}</td>
+	        <td><i class="bi bi-gear"></i></td>
           <td><i class="bi bi-trash"></i></td>
         </tr>
+        {% else %}
         <tr>
-          <td>Washing Machine</td>
-          <td>500 W</td>
-          <td>December 10, 1815</td>
-          <td><i class="bi bi-gear"></i></td>
+          <td>unknown</td>
+          <td>unknown</td>
+          <td>unknown</td>
+	        <td><i class="bi bi-gear"></i></td>
           <td><i class="bi bi-trash"></i></td>
         </tr>
-        <tr>
-          <td>Alice - Iphone 12</td>
-          <td>500 W</td>
-          <td>December 10, 1815</td>
-          <td><i class="bi bi-gear"></i></td>
-          <td><i class="bi bi-trash"></i></td>
-        </tr>
-        <tr>
-          <td>Bob - Iphone 8</td>
-          <td>500 W</td>
-          <td>December 10, 1815</td>
-          <td><i class="bi bi-gear"></i></td>
-          <td><i class="bi bi-trash"></i></td>
-        </tr>
-        <tr>
-          <td>Karsten - OnePlus 6</td>
-          <td>500 W</td>
-          <td>December 10, 1815</td>
-          <td><i class="bi bi-gear"></i></td>
-          <td><i class="bi bi-trash"></i></td>
-        </tr>
+        {% endfor %}
       </table>
     </div>
   </div>
@@ -144,39 +126,63 @@
 
         <div class="wrapper mb-3">
           <div class="d-flex justify-content-center mb-1">
-            <button class="btn btn-secondary mx-1">00:00</button>
-            <button class="btn btn-secondary mx-1">01:00</button>
-            <button class="btn btn-secondary mx-1">02:00</button>
-            <button class="btn btn-secondary mx-1">03:00</button>
-            <button class="btn btn-secondary mx-1">04:00</button>
-            <button class="btn btn-secondary mx-1">05:00</button>
+            <input type="checkbox" class="btn-check" id="btn-check-00" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-00">00:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-01" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-01">01:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-02" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-02">02:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-03" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-03">03:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-04" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-04">04:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-05" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-05">05:00</label><br>
           </div>
 
           <div class="d-flex justify-content-center mb-1">
-            <button class="btn btn-secondary mx-1">06:00</button>
-            <button class="btn btn-secondary mx-1">07:00</button>
-            <button class="btn btn-secondary mx-1">08:00</button>
-            <button class="btn btn-secondary mx-1">09:00</button>
-            <button class="btn btn-secondary mx-1">10:00</button>
-            <button class="btn btn-secondary mx-1">11:00</button>
+            <input type="checkbox" class="btn-check" id="btn-check-06" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-06">06:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-07" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-07">07:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-08" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-08">08:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-09" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-09">09:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-10" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-10">10:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-11" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-11">11:00</label>
           </div>
 
           <div class="d-flex justify-content-center mb-1">
-            <button class="btn btn-secondary mx-1">12:00</button>
-            <button class="btn btn-secondary mx-1">13:00</button>
-            <button class="btn btn-secondary mx-1">14:00</button>
-            <button class="btn btn-secondary mx-1">15:00</button>
-            <button class="btn btn-secondary mx-1">16:00</button>
-            <button class="btn btn-secondary mx-1">17:00</button>
+            <input type="checkbox" class="btn-check" id="btn-check-12" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-12">12:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-13" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-13">13:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-14" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-14">14:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-15" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-15">15:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-16" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-16">16:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-17" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-17">17:00</label>
           </div>
 
           <div class="d-flex justify-content-center mb-1">
-            <button class="btn btn-secondary mx-1">18:00</button>
-            <button class="btn btn-secondary mx-1">19:00</button>
-            <button class="btn btn-secondary mx-1">20:00</button>
-            <button class="btn btn-secondary mx-1">21:00</button>
-            <button class="btn btn-secondary mx-1">22:00</button>
-            <button class="btn btn-secondary mx-1">23:00</button>
+            <input type="checkbox" class="btn-check" id="btn-check-18" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-18">18:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-19" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-19">19:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-20" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-20">20:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-21" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-21">21:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-22" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-22">22:00</label>
+            <input type="checkbox" class="btn-check" id="btn-check-23" checked autocomplete="off">
+            <label class="btn btn-secondary mx-1" for="btn-check-23">23:00</label>
           </div>
         </div>
 
