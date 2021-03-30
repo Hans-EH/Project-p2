@@ -42,9 +42,8 @@ async function registerUser(UserObject) {
     };
 
     const res = await table.insertOne(hans);
-    console.log(typeof res);
-    const resJson = JSON.stringify(res);
-    console.log(resJson);
+    console.log(res.insertedId);
+    console.log(res.ops[0]);
 
     const userProfile = {
       user_link: res._id,
