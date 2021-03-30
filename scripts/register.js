@@ -29,7 +29,7 @@ async function testConnect() {
   }
 }
 
-async function registerUser(UserObject) {
+async function registerUser(userObject) {
   try {
     await client.connect();
     const db = client.db("<monitor-project>");
@@ -37,7 +37,8 @@ async function registerUser(UserObject) {
     const profiles = db.collection("profiles");
 
     // Insert the user object into users table
-    const user_res = await users.insertOne(UserObject);
+    const user_res = await users.insertOne(userObject);
+    console.log(user_res);
 
     // Profile Initial settings
     const userProfile = {
@@ -45,7 +46,7 @@ async function registerUser(UserObject) {
       nightmode: false,
     };
     // Create one to one insert with users
-    const profile_res = await profile.insertOne(userProfile);
+    //const profile_res = await profile.insertOne(userProfile);
   } catch (error) {
     console.log(error);
   }
