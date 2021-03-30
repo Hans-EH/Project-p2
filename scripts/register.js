@@ -38,7 +38,6 @@ async function registerUser(userObject) {
 
     // Insert the user object into users table
     const user_res = await users.insertOne(userObject);
-    console.log(user_res);
 
     // Profile Initial settings
     const userProfile = {
@@ -46,7 +45,9 @@ async function registerUser(userObject) {
       nightmode: false,
     };
     // Create one to one insert with users
-    //const profile_res = await profile.insertOne(userProfile);
+    const profile_res = await profile.insertOne(userProfile);
+
+    console.log(profile_res);
   } catch (error) {
     console.log(error);
   }
