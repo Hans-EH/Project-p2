@@ -53,7 +53,7 @@
     $("#submit").click(function(){
       user=$("#email").val();
       pass=$("#password").val();
-      $.post("http://localhost:3000/login",{user: email,password: pass}, function(data){
+      $.post("mongodb://localhost:27017",{user: email,password: pass}, function(data){
         if(data === 'yes') {
             alert("login success");
           }
