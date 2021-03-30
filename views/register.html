@@ -11,12 +11,7 @@
               <i class="bi bi-person-circle"></i>
             </div>
           </div>
-          <input
-            type="text"
-            class="form-control"
-            id="email"
-            placeholder="E-mail"
-          />
+          <input type="text" class="form-control" id="email" placeholder="E-mail" />
         </div>
       </div>
 
@@ -28,31 +23,19 @@
               <i class="bi bi-key-fill"></i>
             </div>
           </div>
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-            placeholder="Password"
-          />
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
         </div>
       </div>
 
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label"
-          >Confirm Password</label
-        >
+        <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
         <div class="input-group mb-2 mr-sm-2">
           <div class="input-group-prepend">
             <div class="input-group-text">
               <i class="bi bi-key-fill"></i>
             </div>
           </div>
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-            placeholder="Re-enter password"
-          />
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Re-enter password" />
         </div>
       </div>
 
@@ -69,61 +52,63 @@
       <p>Already have an account? <a href="/login">Login</a></p>
     </div>
   </div>
-
+</div>
+<div class="container">
   <!--  Test login-->
-  <div class = "gfg">GeeksforGeeks</div>
-  <div class = "geeks">A computer science portal for geeks</div>
-  <form onSubmit = "return checkPassword(this)">
-  <table border = 1 align = "center">
+  <div class="gfg">GeeksforGeeks</div>
+  <div class="geeks">A computer science portal for geeks</div>
+  <form onSubmit="return checkPassword(this)">
+    <table border=1 align="center">
       <tr>
-          <!-- Enter Username -->
-          <td>Username:</td>
-          <td><input type = text name = name size = 25</td>
+        <!-- Enter Username -->
+        <td>Username:</td>
+        <td><input type=text name=name size=25</td>
       </tr>
       <tr>
-          <!-- Enter Password. -->
-          <td>Password:</td>
-          <td><input type = password name = password1 size = 25</td>
+        <!-- Enter Password. -->
+        <td>Password:</td>
+        <td><input type=password name=password1 size=25</td>
       </tr>
       <tr>
-          <!-- To Confirm Password. -->
-          <td>Confirm Password:</td>
-          <td><input type = password name = password2 size = 25></td>
+        <!-- To Confirm Password. -->
+        <td>Confirm Password:</td>
+        <td><input type=password name=password2 size=25></td>
       </tr>
       <tr>
-          <td colspan = 2 align = right>
-          <input type = submit value = "Submit"></td>
+        <td colspan=2 align=right>
+          <input type=submit value="Submit">
+        </td>
       </tr>
-  </table>
+    </table>
   </form>
-  
+
   <script>
     // Function to check Whether both passwords
     // is same or not.
     function checkPassword(form) {
-        password1 = form.password1.value;
-        password2 = form.password2.value;
+      password1 = form.password1.value;
+      password2 = form.password2.value;
 
-        // If password not entered
-        if (password1 == '')
-            alert ("Please enter Password");
-              
-        // If confirm password not entered
-        else if (password2 == '')
-            alert ("Please enter confirm password");
-              
-        // If Not same return False.    
-        else if (password1 != password2) {
-            alert ("\nPassword did not match: Please try again...")
-            return false;
-        }
+      // If password not entered
+      if (password1 == '')
+        alert("Please enter Password");
 
-        // If same return True.
-        else{
-            alert("Password Match: Welcome to GeeksforGeeks!")
-            return true;
-        }
+      // If confirm password not entered
+      else if (password2 == '')
+        alert("Please enter confirm password");
+
+      // If Not same return False.    
+      else if (password1 != password2) {
+        alert("\nPassword did not match: Please try again...")
+        return false;
+      }
+
+      // If same return True.
+      else {
+        alert("Password Match: Welcome to GeeksforGeeks!")
+        return true;
+      }
     }
-</script>
+  </script>
 </div>
 {% endblock content %}
