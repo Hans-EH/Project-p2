@@ -43,6 +43,8 @@ async function registerUser(UserObject) {
 
     const res = await table.insertOne(hans);
     console.log(typeof res);
+    const resJson = JSON.stringify(res);
+    console.log(resJson);
 
     const userProfile = {
       user_link: res._id,
@@ -50,8 +52,6 @@ async function registerUser(UserObject) {
     };
 
     const profile_res = await profile_table.insertOne(userProfile);
-
-    console.log(res);
   } catch (error) {
     print(error);
   }
