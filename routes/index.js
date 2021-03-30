@@ -3,7 +3,6 @@ var router = express.Router();
 
 const { Device } = require("../scripts/Device");
 const { activeProbability } = require("../scripts/simulation");
-const { testConnect } = require("../scripts/db-ex");
 
 authenticated = true;
 

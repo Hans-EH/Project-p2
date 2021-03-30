@@ -1,4 +1,83 @@
-{% extends "auth_base.html" %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Express</title>
+    <!-- Bootstrap CSS dependency-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <!-- Bootstrap JS dependency-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Chart.js dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <script>
+      var toastElList = [].slice.call(document.querySelectorAll(".toast"));
+      var toastList = toastElList.map(function (toastEl) {
+        return new bootstrap.Toast(toastEl, option);
+      });
+    </script>
+
+    <!-- Bootstrap Icons-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
+    />
+    <!-- Project Styles -->
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="/">Sustainify</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/devices">Devices</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Register</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="/settings">Settings</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <div class="container pb-3">
 <script></script>
 
 <h1>Homepage</h1>
@@ -49,22 +128,13 @@
 
 <!-- Main chart -->
 <div class="row mb-3">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between">
-                <div>
-                    <p class="m-0">CO<sub>2</sub> Emission</p>
-                    <!-- Time stamp -->
-                    <small class="m-0" id="lastUpdate"></small>
-                </div>
-                <!-- Refresh Button -->
-                <button class="btn btn-secondary" id="refresh">
-                    <i class="bi bi-arrow-repeat"></i>
-                </button>
-            </div>
-
-            <canvas id="myChart"></canvas>
-            Data from https://www.energidataservice.dk/tso-electricity/co2emis
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+          <p class="m-0">CO<sub>2</sub> Emission</p>
+          <!-- Time stamp -->
+          <small class="ms-2 me-0 my-0" id="lastUpdateCO2"></small>
         </div>
         <!-- Refresh Button -->
         <button class="btn btn-secondary" id="refreshCO2">
@@ -129,119 +199,53 @@
 </div>
 
 <script>
-    async function energiDataEMI() {
-        try {
-            const DAYSAMOUNT = 30; //change in URI if this is changed.
-            const URI =
-                'https://www.energidataservice.dk/proxy/api/datastore_search_sql?sql=SELECT"Minutes5UTC", "Minutes5DK", "PriceArea", "CO2Emission" FROM "co2emis" ORDER BY "Minutes5UTC" DESC LIMIT 17280'; //every second is a correct datapoint, we need for a month of datapoints which is 17280 ((60*24*DAYS*2)/5)
-            let data = await fetch(URI).then((response) => response.json());
+  async function energiDataEMI() {
+    try {
+      const DAYSAMOUNT = 30; //change in URI if this is changed.
+      const URI =
+        'https://www.energidataservice.dk/proxy/api/datastore_search_sql?sql=SELECT"Minutes5UTC", "Minutes5DK", "PriceArea", "CO2Emission" FROM "co2emis" ORDER BY "Minutes5UTC" DESC LIMIT 17280'; //every second is a correct datapoint, we need for a month of datapoints which is 17280
+      let data = await fetch(URI).then((response) => response.json());
 
-            // Arrays for labels and values
-            let dataLabels = [];
-            let dataValues = [];
-            let dataValuesMonth = [];
-            let daysMonth = 30;
-            let dataValuesWeek = [];
-            let daysWeek = 7;
-            let dataValuesDays = [];
-            let daysDays = 3;
-            let dataTestAccuracy = [];
-            //datapoints on 1 day
-            let dataDay = (60 * 24) / 5;
+      // Arrays for labels and values
+      let dataLabels = [];
+      let dataValues = [];
+      let dataValuesMonth = [];
+      let daysMonth = 30;
+      let dataValuesWeek = [];
+      let daysWeek = 7;
+      let dataValuesDays = [];
+      let daysDays = 3;
+      let dataTestAccuracy = [];
+      //datapoints on 1 day
+      let dataDay = (60 * 24) / 5;
 
+      // Iterate over reponse results
+      console.log("Total CO2 Rows:" + data.result.records.length);
 
-            // Iterate over reponse results
-            console.log("Total CO2 Rows:" + data.result.records.length);
+      for (let i = 0; i < data.result.records.length; i++) {
+        // Push labels and values
+        if (data.result.records[i].PriceArea == "DK1") {
+          dataValues.push(data.result.records[i].CO2Emission);
+          dataLabels.push(data.result.records[i].Minutes5DK.slice(-8, -3));
+        }
+      }
+      // Reverse Arrays
+      dataLabels = dataLabels.reverse();
+      dataValues = dataValues.reverse();
 
-            for (let i = 0; i < data.result.records.length; i++) {
-                // Push labels and values
-                if (data.result.records[i].PriceArea == "DK1") {
-                    dataValues.push(data.result.records[i].CO2Emission);
-                    dataLabels.push(data.result.records[i].Minutes5DK.slice(-8,-3)); //splicing to remove the date but not the time.
-                }
-            }
-            // Reverse Arrays
-            dataLabels = dataLabels.reverse();
-            dataValues = dataValues.reverse();
-
-            //Function that creates a moving average dataset depended on amount of days.
-            function createData(days, newDataValues) {
-                //total data points
-                let dataTotal = days * dataDay;
-                for (let j = 0; j < dataDay; j++) {
-                    newDataValues[j] = 0;
-                    for (let i = j; i < dataTotal; i += dataDay) {
-                        //compounds the values
-                        newDataValues[j] += dataValues[i + (dataDay * DAYSAMOUNT - dataTotal)];
-                    }
-                    //finds average for that time
-                    newDataValues[j] = (newDataValues[j] / days);
-                }
-            }
-            console.log("datavalues initialization done");
-            createData(daysMonth, dataValuesMonth);
-            console.log("datavaluemonth done");
-            createData(daysWeek, dataValuesWeek);
-            console.log("datavalueweek done");
-            createData(daysDays, dataValuesDays);
-            console.log("datavalueyear done");
-            createData(1, dataTestAccuracy);
-            console.log("DataValues length" + dataValues.length + "\n");
-            console.log("DataValuesMonth length" + dataValuesMonth.length + "\n");
-            console.log("DataLabels length" + dataLabels.length + "\n");
-
-            var ctx = document.getElementById("myChart").getContext("2d");
-            var chart = new Chart(ctx, {
-                // The type of chart we want to create
-                type: "line",
-                data: {
-                    labels: dataLabels.slice(dataLabels.length - 288, dataLabels.length),
-                    datasets: [
-                        {
-                            label: "CO2 Emission last 24 hours (5min) (g/kWh)",
-                            borderColor: "rgb(0, 255, 0)",
-                            data: dataValues.slice(dataValues.length - 288, dataValues.length),
-                            //steppedLine: "true",
-                        },
-                        {
-                            label: "CO2 Emission " + daysDays + " days running average (5min) (g/kWh)",
-                            borderColor: "rgb(255, 255, 0)",
-                            data: dataValuesDays.slice(0, 288),
-                            hidden: true,
-                            //steppedLine: "true",
-                        },
-                        {
-                            label: "CO2 Emission " + daysWeek + " days running average (5min) (g/kWh)",
-                            borderColor: "rgb(255, 153, 0)",
-                            data: dataValuesWeek.slice(0, 288),
-                            hidden: true,
-                            //steppedLine: "true",
-                        },
-                        {
-                            label: "CO2 Emission " + daysMonth + " days running average (5min) (g/kWh)",
-                            borderColor: "rgb(255, 0, 0)",
-                            data: dataValuesMonth.slice(0, 288),
-                            //steppedLine: "true",
-                        },
-                        // {
-                        //     label: "CO2 Emission " + "test" + " days running average (5min) (g/kWh)",
-                        //     borderColor: "rgb(0, 255, 150)",
-                        //     data: dataTestAccuracy.slice(0, 288),
-                        //     //steppedLine: "true",
-                        // },
-                    ],
-                },
-                // Configuration options go here
-                options: {},
-            });
-
-            // return labels and values as object
-            //   return {
-            //     dataValues,
-            //     dataLabels,
-            //   };
-        } catch {
-            console.log("Forhelvede....");
+      //Function that creates a moving average dataset depended on amount of days.
+      function createData(days, newDataValues) {
+        //total data points
+        let dataTotal = days * dataDay;
+        for (let j = 0; j < dataDay; j++) {
+          newDataValues[j] = 0;
+          for (let i = j; i < dataTotal; i += dataDay) {
+            //compounds the values
+            newDataValues[j] +=
+              dataValues[i + (dataDay * DAYSAMOUNT - dataTotal)];
+          }
+          //finds average for that time
+          newDataValues[j] = newDataValues[j] / days;
         }
       }
 
@@ -324,7 +328,7 @@
   async function greenEnergyDataEMI() {
     try {
       const URI =
-        'https://www.energidataservice.dk/proxy/api/datastore_search_sql?sql=SELECT "Minutes5DK", "PriceArea", "OffshoreWindPower", "OnshoreWindPower", "SolarPower" FROM "electricityprodex5minrealtime" ORDER BY "Minutes5UTC" DESC LIMIT 1440';
+        'https://www.energidataservice.dk/proxy/api/datastore_search_sql?sql=SELECT "Minutes5DK", "PriceArea", "OffshoreWindPower", "OnshoreWindPower", "SolarPower" FROM "electricityprodex5minrealtime" ORDER BY "Minutes5UTC" DESC LIMIT 100';
       let data = await fetch(URI).then((response) => response.json());
 
       // Arrays for labels and values
@@ -429,4 +433,6 @@
     });
 </script>
 
-{% endblock %}
+</div>
+  </body>
+</html>
