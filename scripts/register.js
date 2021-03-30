@@ -37,11 +37,12 @@ async function registerUser() {
     const profile_table = db.collection("profiles");
 
     const hans = {
-      user_id: "Hans",
+      user_id: "Frederik",
       password: "123456",
     };
 
-    table.insertOne(hans);
+    const res = await table.insertOne(hans);
+    console.log(res);
   } catch (error) {
     print(error);
   }
