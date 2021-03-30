@@ -29,32 +29,35 @@ async function testConnect() {
   }
 }
 
-async function registerUser(UserObject) {
+async function registerUser(userObject) {
   try {
     await client.connect();
     const db = client.db("<monitor-project>");
-    const table = db.collection("users");
-    const profile_table = db.collection("profiles");
+    const users = db.collection("users");
+    const profiles = db.collection("profiles");
 
-    const hans = {
-      email: "Frederik",
-      password: "123456",
-    };
+    // Insert the user object into users table
+    const user_res = await users.insertOne(userObject);
 
-    const res = await table.insertOne(hans);
-    console.log(res.insertedId);
-    console.log(res.ops[0]);
-
+    // Profile Initial settings
     const userProfile = {
-      user_link: res._id,
-      nightmode: true,
+      user_link: user_res.insertedId,
+      nightmode: false,
     };
+    // Create one to one insert with users
+    const profile_res = await profiles.insertOne(userProfile);
 
-    const profile_res = await profile_table.insertOne(userProfile);
+    console.log(profile_res.result);
   } catch (error) {
-    print(error);
+    console.log(error);
   }
 }
 
 //testConnect();
-registerUser();
+
+const frederik = {
+  email: "thorbensen@gmail.com",
+  password: "hgsdf2i23orijgsd",
+};
+
+registerUser(frederik);
