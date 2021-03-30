@@ -53,4 +53,10 @@ async function registerUser(userObject) {
 }
 
 //testConnect();
-registerUser();
+
+const frederik = {
+  email: "thorbensen@gmail.com",
+  password: "hgsdf2i23orijgsd",
+};
+
+registerUser(frederik);
