@@ -30,7 +30,7 @@ router.get("/settings", function (req, res, next) {
 });
 
 // Devices Route
-router.get("/devices", function (req, res, next) {
+router.get("/devices", async function (req, res, next) {
   if (authenticated) {
     // Data
     let myCooler = new Device("myCooler", 1000);
