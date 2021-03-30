@@ -49,41 +49,23 @@
           <th>Edit</th>
           <th>Remove</th>
         </tr>
+        {% for device in devices %}
         <tr>
-          <td>Drier</td>
-          <td>500 W</td>
-          <td>December 10, 1815</td>
-          <td><i class="bi bi-gear"></i></td>
+          <td>{{device.name}}</td>
+          <td>{{device.energyUsage}}</td>
+          <td>{{device.timeModified}}</td>
+	        <td><i class="bi bi-gear"></i></td>
           <td><i class="bi bi-trash"></i></td>
         </tr>
+        {% else %}
         <tr>
-          <td>Washing Machine</td>
-          <td>500 W</td>
-          <td>December 10, 1815</td>
-          <td><i class="bi bi-gear"></i></td>
+          <td>unknown</td>
+          <td>unknown</td>
+          <td>unknown</td>
+	        <td><i class="bi bi-gear"></i></td>
           <td><i class="bi bi-trash"></i></td>
         </tr>
-        <tr>
-          <td>Alice - Iphone 12</td>
-          <td>500 W</td>
-          <td>December 10, 1815</td>
-          <td><i class="bi bi-gear"></i></td>
-          <td><i class="bi bi-trash"></i></td>
-        </tr>
-        <tr>
-          <td>Bob - Iphone 8</td>
-          <td>500 W</td>
-          <td>December 10, 1815</td>
-          <td><i class="bi bi-gear"></i></td>
-          <td><i class="bi bi-trash"></i></td>
-        </tr>
-        <tr>
-          <td>Karsten - OnePlus 6</td>
-          <td>500 W</td>
-          <td>December 10, 1815</td>
-          <td><i class="bi bi-gear"></i></td>
-          <td><i class="bi bi-trash"></i></td>
-        </tr>
+        {% endfor %}
       </table>
     </div>
   </div>
