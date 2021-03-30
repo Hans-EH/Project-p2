@@ -42,11 +42,19 @@ async function registerUser() {
     };
 
     const res = await table.insertOne(hans);
+
+    const userProfile = {
+      user_link: res._id,
+      nightmode: true,
+    };
+
+    const profile_res = await profile_table.insertOne(userProfile);
+
     console.log(res);
   } catch (error) {
     print(error);
   }
 }
 
-testConnect();
+//testConnect();
 registerUser();
