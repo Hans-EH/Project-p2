@@ -40,11 +40,10 @@ async function registerUser(userObject) {
 
     bcrypt.hash(userObject.password, saltRounds, (err, hash) => {
       userObject.password = hash;
-      console.log(userObject.password);
     });
 
     // Insert the user object into users table
-    console.log(userObject);
+    console.table(userObject);
     const user_res = await users.insertOne(userObject);
 
     // Check if the insert was succesfull.
