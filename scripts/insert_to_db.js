@@ -1,3 +1,8 @@
+const { MongoClient } = require("mongodb");
+
+const uri = "mongodb://localhost:27017";
+const client = new MongoClient(uri, { useUnifiedTopology: true });
+
 exports.addDevice = async function addDevice(deviceObject) {
     try {
       await client.connect();
