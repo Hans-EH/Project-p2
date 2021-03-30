@@ -38,9 +38,13 @@ async function registerUser(userObject) {
     const users = db.collection("users");
     const profiles = db.collection("profiles");
 
-    bcrypt.hash(userObject.password, saltRounds, (err, hash) => {
-      userObject.password = hash;
-    });
+    userObject.password = bcrypt.hash(
+      userObject.password,
+      saltRounds,
+      (err, hash) => {
+        return hash;
+      }
+    );
 
     // Insert the user object into users table
     console.table(userObject);
@@ -48,7 +52,7 @@ async function registerUser(userObject) {
 
     // Check if the insert was succesfull.
     if (user_res.result.ok && user_res.result.n == 1) {
-      console.log(`- User Created succesfully: ${user_res.result.ok}`);
+      console.log(`- Users Created succesfully: ${user_res.result.ok}`);
 
       // Profile Initial settings
       const userProfile = {
@@ -67,8 +71,7 @@ async function registerUser(userObject) {
   }
 }
 
-//testConnect();
-
+// Dummy Data
 const frederik = {
   email: "thorbensen@gmail.com",
   password: "frederik123",
