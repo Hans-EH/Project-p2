@@ -56,5 +56,5 @@ async function registerUser() {
   }
 }
 
-//testConnect();
-registerUser();
+testConnect();
+//registerUser();
