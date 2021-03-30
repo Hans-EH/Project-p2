@@ -47,7 +47,7 @@ async function registerUser(userObject) {
     // Create one to one insert with users
     const profile_res = await profiles.insertOne(userProfile);
 
-    console.log(profile_res);
+    console.log(profile_res.result);
   } catch (error) {
     console.log(error);
   }
