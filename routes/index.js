@@ -43,6 +43,14 @@ router.get("/devices", function (req, res, next) {
   }
 });
 
+//Add device post handling
+router.post("/devices/post", function (req, res) {
+  let devicename = req.body.devicename;
+  let energyusage = req.body.energyusage;
+  console.log(`Devicename: ${devicename}, Energy Usage: ${energyusage}`);
+  res.end("Successfully got device!");
+});
+
 // User registration route
 router.get("/register", function (req, res, next) {
   res.render("register", { title: "register" });
