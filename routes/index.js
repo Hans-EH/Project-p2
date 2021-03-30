@@ -35,12 +35,13 @@ router.get("/devices", function (req, res, next) {
     // Data
     let myCooler = new Device("myCooler", 1000);
     myCooler.updateActiveTime({ "09:00": true, "18:00": true });
-
+    let devicesList = getAllDevices();
     res.render("devices", {
       title: "Devices",
       items: activeProbability(myCooler),
-      devices: getAllDevices(),
+      devices: devicesList,
     });
+
   } else {
     res.redirect("/login");
   }
