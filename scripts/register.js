@@ -1,4 +1,6 @@
 const { MongoClient } = require("mongodb");
+const bcrypt = require("bcrypt"); //Importing the NPM bcrypt package.
+const saltRounds = 10; //We are setting salt rounds, higher is safer.
 
 const uri = "mongodb://localhost:27017";
 const client = new MongoClient(uri, { useUnifiedTopology: true });
@@ -36,6 +38,12 @@ async function registerUser(userObject) {
     const users = db.collection("users");
     const profiles = db.collection("profiles");
 
+    let userPass = userObject.password;
+    bcrypt.hash(userPass, saltRounds, (err, hash) => {
+      userObject.password = hash;
+      console.log(hash);
+    });
+
     // Insert the user object into users table
     const user_res = await users.insertOne(userObject);
 
@@ -64,7 +72,7 @@ async function registerUser(userObject) {
 
 const frederik = {
   email: "thorbensen@gmail.com",
-  password: "hgsdf2i23orijgsd",
+  password: "frederik123",
 };
 
 registerUser(frederik);
