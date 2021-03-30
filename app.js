@@ -2,6 +2,7 @@ var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
+var bodyParser = require("body-parser");
 var logger = require("morgan");
 var nunjucks = require("nunjucks");
 
@@ -21,6 +22,9 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
