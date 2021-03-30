@@ -25,7 +25,7 @@ exports.activeProbability = function activeProbability(device){
         }
     }
 
-    /* */
+    /* Find the index distance to the next active  */
     for (let i = 0; i < onVector.length; i++){
 
         propVector[i] = arrayMin(activeIndex.map(n => {
