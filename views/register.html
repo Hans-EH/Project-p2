@@ -2,7 +2,7 @@
 <div class="container">
   <div id="main" class="justify-content-center">
     <h1>Register</h1>
-    <form onsubmit="return validateRegistration(this)">
+    <form onsubmit="return validateRegInfo(this)">
       <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
         <div class="input-group mb-2 mr-sm-2">
@@ -54,36 +54,8 @@
   </div>
 </div>
 <div class="container">
-  <script>
-    // Function to check Whether both passwords
-    // is same or not.
-    function validateRegistration(form) {
-      email = form.email1.value;
-      password1 = form.password1.value;
-      password2 = form.password2.value;
-
-      if (email == '')
-        alert("Please enter a valid email on the form <name>@mail.com");
-      // If password not entered
-      else if (password1 == '')
-        alert("Please enter Password");
-
-      // If confirm password not entered
-      else if (password2 == '')
-        alert("Please enter confirm password");
-
-      // If Not same return False.    
-      else if (password1 != password2) {
-        alert("\nPassword did not match: Please try again...")
-        return false;
-      }
-
-      // If same return True.
-      else {
-        alert("User Registration Complete: Welcome to Sustanify!!")
-        return true;
-      }
-    }
-  </script>
 </div>
+<scripts>
+  
+</scripts>
 {% endblock content %}

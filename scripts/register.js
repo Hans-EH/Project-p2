@@ -61,3 +61,31 @@ const frederik = {
 };
 
 registerUser(frederik);
+
+exports.validateRegInfo = function validateRegInfo(form) {
+  email = form.email1.value;
+  password1 = form.password1.value;
+  password2 = form.password2.value;
+
+  if (email == '')
+    alert("Please enter a valid email on the form name@mail.com");
+  // If password not entered
+  else if (password1 == '')
+    alert("Please enter Password");
+
+  // If confirm password not entered
+  else if (password2 == '')
+    alert("Please confirm password");
+
+  // If Not same return False.    
+  else if (password1 != password2) {
+    alert("\nPassword did not match: Please try again...")
+    return false;
+  }
+
+  // If same return True.
+  else {
+    alert("User Registration Complete: Welcome to Sustanify!!")
+    return true;
+  }
+}
