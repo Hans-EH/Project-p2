@@ -273,9 +273,9 @@
         //in order for it to be plottet nicely
         for(let i = 0; i < dataDay; i++){
           newDataLine[i] = percentile;
-        }
+        };
         return newDataLine;
-      }
+      };
       let asdqwe = createPercentileLine(15,daysDays);
       console.log(asdqwe[1]);
 
@@ -325,8 +325,7 @@
               //steppedLine: "true",
             },
             {
-              label:
-                "50 percentile line",
+              label: "50 percentile line",
               borderColor: "rgb(255, 0, 0)",
               data: createPercentileLine(50,daysDays).slice(0, dataDay),
               //steppedLine: "true",
