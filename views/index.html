@@ -304,41 +304,41 @@
               ),
               //steppedLine: "true",
             },
-            {
-              label:
-                "CO2 Emission " +
-                daysDays +
-                " days running average (5min) (g/kWh)",
-              borderColor: "rgb(255, 255, 0)",
-              data: dataValuesDays.slice(0, dataDay),
-              hidden: true,
-              //steppedLine: "true",
-            },
-            {
-              label:
-                "CO2 Emission " +
-                daysWeek +
-                " days running average (5min) (g/kWh)",
-              borderColor: "rgb(255, 153, 0)",
-              data: dataValuesWeek.slice(0, dataDay),
-              hidden: true,
-              //steppedLine: "true",
-            },
-            {
-              label:
-                "CO2 Emission " +
-                daysMonth +
-                " days running average (5min) (g/kWh)",
-              borderColor: "rgb(255, 0, 0)",
-              data: dataValuesMonth.slice(0, dataDay),
-              //steppedLine: "true",
-            },
-            {
-              label: "50 percentile line",
-              borderColor: "rgb(255, 0, 0)",
-              data: createPercentileLine(50,daysDays.slice(0,dataDay)),
-              //steppedLine: "true",
-            },
+           // {
+           //   label:
+           //     "CO2 Emission " +
+           //     daysDays +
+           //     " days running average (5min) (g/kWh)",
+           //   borderColor: "rgb(255, 255, 0)",
+           //   data: dataValuesDays.slice(0, dataDay),
+           //   hidden: true,
+           //   //steppedLine: "true",
+           // },
+           // {
+           //   label:
+           //     "CO2 Emission " +
+           //     daysWeek +
+           //     " days running average (5min) (g/kWh)",
+           //   borderColor: "rgb(255, 153, 0)",
+           //   data: dataValuesWeek.slice(0, dataDay),
+           //   hidden: true,
+           //   //steppedLine: "true",
+           // },
+           // {
+           //   label:
+           //     "CO2 Emission " +
+           //     daysMonth +
+           //     " days running average (5min) (g/kWh)",
+           //   borderColor: "rgb(255, 0, 0)",
+           //   data: dataValuesMonth.slice(0, dataDay),
+           //   //steppedLine: "true",
+           // },
+           // {
+           //   label: "50 percentile line",
+           //   borderColor: "rgb(255, 0, 0)",
+           //   data: createPercentileLine(50,daysDays.slice(0,dataDay)),
+           //   //steppedLine: "true",
+           // },
             
             // {
             //     label: "CO2 Emission " + "test" + " days running average (5min) (g/kWh)",
