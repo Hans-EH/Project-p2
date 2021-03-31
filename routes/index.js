@@ -2,9 +2,9 @@ var express = require("express");
 var router = express.Router();
 
 const { Device } = require("../scripts/Device");
-const { activeProbability } = require("../scripts/simulation");
-const { addDevice } = require("../scripts/insert_to_db");
-const { getAllDevices } = require("../scripts/retreive_from_db");
+//const { activeProbability } = require("../scripts/simulation");
+//const { addDevice } = require("../scripts/insert_to_db");
+//const { getAllDevices } = require("../scripts/retreive_from_db");
 
 authenticated = true;
 
@@ -30,22 +30,19 @@ router.get("/settings", function (req, res, next) {
 });
 
 // Devices Route
-router.get("/devices", async function (req, res, next) {
+router.get("/devices", function (req, res, next) {
   if (authenticated) {
     // This is an example of showing a device on our device.html
-    let myCooler = new Device("myCooler", 1000);
-    myCooler.updateActiveTime({ "09:00": true, "18:00": true });
-    
+    // let myCooler = new Device("myCooler", 1000);
+    // myCooler.updateActiveTime({ "09:00": true, "18:00": true });
+
     //Make a request to our database to retrieve a list of all devices and wait for a respond
-    let deviceList = await getAllDevices();
+    //let deviceList = await getAllDevices();
 
     //Pass over the device list and probability array of the above example to the client
     res.render("devices", {
       title: "Devices",
-      items: activeProbability(myCooler),
-      devices: deviceList,
     });
-
   } else {
     res.redirect("/login");
   }
@@ -53,10 +50,12 @@ router.get("/devices", async function (req, res, next) {
 
 //Add device post handling
 router.post("/devices/post", function (req, res) {
-  let newDevice = new Device(req.body.devicename, req.body.energyusage)
-  newDevice.updateActiveTime({"18:00": true})
+  let newDevice = new Device(req.body.devicename, req.body.energyusage);
+  newDevice.updateActiveTime({ "18:00": true });
   addDevice(newDevice);
-  console.log(`Devicename: ${req.body.devicename}, Energy Usage: ${req.body.energyusage}`);
+  console.log(
+    `Devicename: ${req.body.devicename}, Energy Usage: ${req.body.energyusage}`
+  );
   res.end("Successfully got device!");
 });
 
