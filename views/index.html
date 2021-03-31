@@ -260,12 +260,16 @@
       console.log("DataLabels length" + dataLabels.length + "\n");
 
       //a function that creates the percentile line using preexisting moving average and a percentile.
-      function createPercentileLine(p, movingAverageData){
+      function createPercentileLine(p, inputData){
         //percentile to calculate to.
-        p = 100/p;
-        let sortedData = sort(movingAverageData);
+        console.log("inside: function start");
+        p = Math.ceil(100/p);
+        console.log(p);
+        console.log(inputData[1]);
+        inputData.sort(compareNumbers);
+        console.log("inside: sorted data: "+inputData+"\n unsortedData: "+inputData);
         //calculating percentile
-        let percentile = sortedData[Math.ceil(((movingAverageData.length+1)/p))];
+        let percentile = inputData[Math.floor(((inputData.length+1)/p))];
         let newDataLine = [];
         console.log(p+" percentile has value "+percentile);
         
@@ -276,8 +280,13 @@
         };
         return newDataLine;
       };
-      let asdqwe = createPercentileLine(15,daysDays);
-      console.log(asdqwe[1]);
+      //comparenumbers function, to be used with sort.
+      function compareNumbers(a,b){
+        return a-b;
+      }
+      console.log(daysDays.slice[0,dataDay]);
+      let asd = [1,5,2,3,102,40,82,30,45,9];
+      let asdqwe = createPercentileLine(15,asd);
 
       var ctx = document.getElementById("chartCO2").getContext("2d");
       var chart = new Chart(ctx, {
@@ -327,7 +336,7 @@
             {
               label: "50 percentile line",
               borderColor: "rgb(255, 0, 0)",
-              data: createPercentileLine(50,daysDays).slice(0, dataDay),
+              data: createPercentileLine(50,daysDays.slice(0,dataDay)),
               //steppedLine: "true",
             },
             
