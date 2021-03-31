@@ -38,6 +38,7 @@ async function registerUser(userObject) {
     const users = db.collection("users");
     const profiles = db.collection("profiles");
 
+    // encrypt user password
     userObject.password = bcrypt.hash(
       userObject.password,
       saltRounds,
