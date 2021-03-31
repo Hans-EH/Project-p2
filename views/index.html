@@ -259,6 +259,26 @@
       console.log("DataValuesMonth length" + dataValuesMonth.length + "\n");
       console.log("DataLabels length" + dataLabels.length + "\n");
 
+      //a function that creates the percentile line using preexisting moving average and a percentile.
+      function createPercentileLine(p, movingAverageData){
+        //percentile to calculate to.
+        p = 100/p;
+        let sortedData = sort(movingAverageData);
+        //calculating percentile
+        let percentile = sortedData[ceil(((movingAverageData.length+1)/p))];
+        let newDataLine = [];
+        console.log(p+" percentile has value "+percentile);
+        
+        //duplicate the result to every datapoint through the day
+        //in order for it to be plottet nicely
+        for(let i = 0; i < dataDay; i++){
+          newDataLine[i] = percentile;
+        }
+        return newDataLine;
+      }
+      let asdqwe = createPercentileLine(15,daysDays);
+      console.log(asdqwe);
+
       var ctx = document.getElementById("chartCO2").getContext("2d");
       var chart = new Chart(ctx, {
         // The type of chart we want to create
@@ -300,6 +320,13 @@
                 "CO2 Emission " +
                 daysMonth +
                 " days running average (5min) (g/kWh)",
+              borderColor: "rgb(255, 0, 0)",
+              data: dataValuesMonth.slice(0, 288),
+              //steppedLine: "true",
+            },
+            {
+              label:
+                "Median CO2, 24 hours average",
               borderColor: "rgb(255, 0, 0)",
               data: dataValuesMonth.slice(0, 288),
               //steppedLine: "true",
