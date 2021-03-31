@@ -8,7 +8,7 @@ const { getAllDevices } = require("../scripts/retreive_from_db");
 
 authenticated = true;
 
-/* GET home page. */
+// GET Home page
 router.get("/", function (req, res, next) {
   console.log("Cookies: ", req.cookies); // Cookies that have not been signed
   console.log("Signed Cookies: ", req.signedCookies); // Cookies that have been signed
@@ -20,7 +20,7 @@ router.get("/", function (req, res, next) {
   }
 });
 
-// Settings route
+// GET Settings route
 router.get("/settings", function (req, res, next) {
   if (authenticated) {
     res.render("settings", { title: "Settings" });
@@ -29,7 +29,7 @@ router.get("/settings", function (req, res, next) {
   }
 });
 
-// Devices Route
+// GET Devices Route
 router.get("/devices", async function (req, res, next) {
   if (authenticated) {
     // This is an example of showing a device on our device.html
@@ -50,7 +50,7 @@ router.get("/devices", async function (req, res, next) {
   }
 });
 
-//Add device post handling
+// POST Devices route
 router.post("/devices/post", function (req, res) {
   let newDevice = new Device(req.body.devicename, req.body.energyusage);
   newDevice.updateActiveTime({ "18:00": true });
@@ -61,15 +61,14 @@ router.post("/devices/post", function (req, res) {
   res.end("Successfully got device!");
 });
 
-router.post("/handle", (request, response) => {
-  //code to perform particular action.
-  //To access POST variable use req.body()methods.
-  console.log(request.body);
-});
-
-// User registration route
+// GET Register route
 router.get("/register", function (req, res, next) {
   res.render("register", { title: "register" });
+});
+
+// POST Register route
+router.post("/register/post", function (req, res, next) {
+  console.log("Hello World");
 });
 
 // User authentication route
