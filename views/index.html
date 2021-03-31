@@ -265,7 +265,7 @@
         p = 100/p;
         let sortedData = sort(movingAverageData);
         //calculating percentile
-        let percentile = sortedData[ceil(((movingAverageData.length+1)/p))];
+        let percentile = sortedData[Math.ceil(((movingAverageData.length+1)/p))];
         let newDataLine = [];
         console.log(p+" percentile has value "+percentile);
         
@@ -277,20 +277,20 @@
         return newDataLine;
       }
       let asdqwe = createPercentileLine(15,daysDays);
-      console.log(asdqwe);
+      console.log(asdqwe[1]);
 
       var ctx = document.getElementById("chartCO2").getContext("2d");
       var chart = new Chart(ctx, {
         // The type of chart we want to create
         type: "line",
         data: {
-          labels: dataLabels.slice(dataLabels.length - 288, dataLabels.length),
+          labels: dataLabels.slice(dataLabels.length - dataDay, dataLabels.length),
           datasets: [
             {
               label: "CO2 Emission last 24 hours (5min) (g/kWh)",
               borderColor: "rgb(0, 255, 0)",
               data: dataValues.slice(
-                dataValues.length - 288,
+                dataValues.length - dataDay,
                 dataValues.length
               ),
               //steppedLine: "true",
@@ -301,7 +301,7 @@
                 daysDays +
                 " days running average (5min) (g/kWh)",
               borderColor: "rgb(255, 255, 0)",
-              data: dataValuesDays.slice(0, 288),
+              data: dataValuesDays.slice(0, dataDay),
               hidden: true,
               //steppedLine: "true",
             },
@@ -311,7 +311,7 @@
                 daysWeek +
                 " days running average (5min) (g/kWh)",
               borderColor: "rgb(255, 153, 0)",
-              data: dataValuesWeek.slice(0, 288),
+              data: dataValuesWeek.slice(0, dataDay),
               hidden: true,
               //steppedLine: "true",
             },
@@ -321,16 +321,17 @@
                 daysMonth +
                 " days running average (5min) (g/kWh)",
               borderColor: "rgb(255, 0, 0)",
-              data: dataValuesMonth.slice(0, 288),
+              data: dataValuesMonth.slice(0, dataDay),
               //steppedLine: "true",
             },
             {
               label:
-                "Median CO2, 24 hours average",
+                "50 percentile line",
               borderColor: "rgb(255, 0, 0)",
-              data: dataValuesMonth.slice(0, 288),
+              data: createPercentileLine(50,daysDays).slice(0, dataDay),
               //steppedLine: "true",
             },
+            
             // {
             //     label: "CO2 Emission " + "test" + " days running average (5min) (g/kWh)",
             //     borderColor: "rgb(0, 255, 150)",
