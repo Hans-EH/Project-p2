@@ -264,13 +264,11 @@
               let percentileNr = Math.floor((inputData.length/100)*p);
               //new dataline to be filled for use as a graph.
               let newDataLine = [];
-              console.log(inputData);
-              console.log(inputData.length);
-              console.log(p+"% saving, nr: "+percentileNr);
+              console.log((100-p)+"% saving, nr: "+percentileNr+", value: "+inputData[percentileNr]);
               //duplicate the result to every datapoint through the day
               //in order for it to be plottet nicely
               for (let i = 0; i < dataDay; i++) {
-                newDataLine[i] = percentileNr;
+                newDataLine[i] = inputData[percentileNr];
               };
               return newDataLine;
             };
