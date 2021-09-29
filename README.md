@@ -1,4 +1,6 @@
 # Project-p2
+this is the first repository for the P2 project. The real and finished project can be found here:
+https://github.com/Hans-EH/sustaininator
 
 ## MongoDB documentation
 
